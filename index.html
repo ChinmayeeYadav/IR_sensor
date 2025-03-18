@@ -43,7 +43,7 @@
 
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-        const sensorRef = database.ref("irstatus/value");
+        const sensorRef = database.ref("/irstatus/value");
 
         sensorRef.on("value", (snapshot) => {
             const sensorValue = snapshot.val();
