@@ -3,50 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IR Sensor Status</title>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
+    <title>iCare Connect - Firebase Boolean Read</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f3f3f3;
-            padding: 20px;
+            margin: 50px;
         }
-        .status-box {
-            display: inline-block;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
-            font-size: 20px;
+        #status {
+            font-size: 24px;
             font-weight: bold;
             margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
         }
-        .detected { background-color: red; }
-        .no-object { background-color: green; }
+        .on {
+            color: white;
+            background-color: green;
+        }
+        .off {
+            color: white;
+            background-color: red;
+        }
     </style>
 </head>
 <body>
-    <h1>IR Sensor Status</h1>
-    <div id="sensorStatus" class="status-box no-object">Loading...</div>
-    
+
+    <h2>iCare Connect Status</h2>
+    <p>Status: <span id="status" class="off">Loading...</span></p>
+
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyC7N8MMiM3gKjShQ1GYJj4SwejZGb69Zd8",
-            authDomain: "servo-position.firebaseapp.com",
-            databaseURL: "https://servo-position-default-rtdb.firebaseio.com",
-            projectId: "servo-position",
-            storageBucket: "servo-position.firebasestorage.app",
-            messagingSenderId: "990217520676",
-            appId: "1:990217520676:web:8eda96a7edd3cc5a0c3ab1"
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         var database = firebase.database();
 
         // Function to update UI based on Firebase boolean value
         function updateStatus(sensorValue) {
-            let statusElement = document.getElementById("sensorStatus");
+            let statusElement = document.getElementById("status");
 
             if (sensorValue === true) {
                 statusElement.innerText = "ON";
@@ -76,5 +82,6 @@
             }
         });
     </script>
+
 </body>
 </html>
